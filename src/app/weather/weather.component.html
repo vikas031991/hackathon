@@ -1,0 +1,48 @@
+<div>
+	<div>
+		<label>Enter City Name</label>
+		<input type="text" [(ngModel)]='city' />
+	</div>
+	<div>
+		<button type="submit" (click)="getWeather()">Get Weather Now</button>
+		<button type="submit" (click)="forcast()">Forcast</button>
+	</div>
+
+	<div *ngIf="showWeather.length != 0">
+		<table align="center">
+			<thead>
+				<tr>
+					<th>City</th>
+					<th>Temp</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let x of showWeather">
+					<td>{{x.name}}</td>
+					<td >{{x.main.temp}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<div *ngIf="showForcast.length != 0">
+		<table align="center">
+			<thead>
+				<tr>
+					<th>City</th>
+					<td *ngFor="let item of showForcast[0].list">{{item.dt_txt.split(' ')[1]}}</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let x of showForcast">
+					<td>{{x.city.name}}</td>
+					<td *ngFor="let y of x.list">{{y.main.temp}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div *ngIf="errorCode">
+		{{errorCode}}
+	</div>
+</div>
